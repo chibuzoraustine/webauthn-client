@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = 'http://localhost:5000';
+const apiUrl = 'https://chibuzornode.moipayway.dev/webauthn';
 
 const bufferToBase64 = (buffer: ArrayBuffer): string => {
     return btoa(String.fromCharCode(...new Uint8Array(buffer)));

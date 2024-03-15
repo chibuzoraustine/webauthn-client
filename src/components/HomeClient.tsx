@@ -27,7 +27,7 @@ export default function HomeClient() {
     }
   }, []);
 
-  const apiUrl = 'http://localhost:5000';
+  // const apiUrl = 'http://localhost:5000';
   // const apiUrl = 'https://chibuzornode.moipayway.dev/webauthn';
 
   const removeCredential = () => {
