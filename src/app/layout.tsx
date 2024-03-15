@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppProvider>
           <div className="w-full bg-neutral-800 p-5 border-b-neutral-500 border-b-2 font-bold flex justify-between">
-            <div>Webauthn</div>
+            <div>Webauthn Demo</div>
             <div className="flex">
               <div className="mr-3"><Link href={'/'}>Home</Link></div>
               <div className="mr-3"><Link href={'/user/profile'}>Profile</Link></div>
