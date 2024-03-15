@@ -1,6 +1,6 @@
 "use client"
 
-import { authenticate, register } from "mpw-webauthn";
+import { authenticate, register } from "@/lib/mpw-webauthn";
 import { useEffect, useRef, useState } from "react";
 
 export default function HomeClient() {
