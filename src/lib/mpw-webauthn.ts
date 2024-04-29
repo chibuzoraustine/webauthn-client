@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const apiUrl = 'https://chibuzornode.moipayway.dev/webauthn';
+// const apiUrl = 'http://localhost:5000';
 
 const bufferToBase64 = (buffer: ArrayBuffer): string => {
     return btoa(String.fromCharCode(...new Uint8Array(buffer)));
@@ -23,7 +24,9 @@ export const register = async (merchant_id: string, unique_identifier: string): 
 }> => {
     try {
         isBrowser();
-        const opt_resp = (await axios.post(`${apiUrl}/registration-options`)).data;
+        const opt_resp = (await axios.post(`${apiUrl}/registration-options`, {
+            client_domain: getHost()
+        })).data;
 
         const { registrationOptions: credentialCreationOptions, registration_session_id } = opt_resp.data;
 
@@ -54,6 +57,7 @@ export const register = async (merchant_id: string, unique_identifier: string): 
         };
 
         const resp = (await axios.post(`${apiUrl}/register`, {
+            client_domain: getHost(),
             credential: JSON.stringify(data),
             registration_session_id: registration_session_id,
             merchant_id: merchant_id,
@@ -83,7 +87,9 @@ export const authenticate = async (credential_id: string, device_id: string, reg
 }> => {
     try {
         isBrowser();
-        const auth_resp = (await axios.post(`${apiUrl}/authentication-options`)).data;
+        const auth_resp = (await axios.post(`${apiUrl}/authentication-options`, {
+            client_domain: getHost()
+        })).data;
 
         const { authnOptions: credentialRequestOptions, authentication_session_id } = auth_resp.data;
 
@@ -115,6 +121,7 @@ export const authenticate = async (credential_id: string, device_id: string, reg
         };
 
         const response = (await axios.post(`${apiUrl}/authenticate`, {
+            client_domain: getHost(),
             credential: JSON.stringify(data),
             authentication_session_id: authentication_session_id,
             registration_session_id: registration_session_id,
@@ -147,5 +154,14 @@ export class RequestError extends Error {
 function isBrowser() {
     if (typeof window === 'undefined') {
         throw new Error('This library is intended for use in browser environments only.');
+    }
+}
+
+function getHost() {
+    var hostname = window.location.hostname;
+    if (hostname === 'localhost') {
+      return hostname;
+    } else {
+      return window.location.host;
     }
 }

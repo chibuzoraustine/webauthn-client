@@ -6,7 +6,17 @@ import React from 'react'
 function ProfileClient() {
 
   return (
-    <div>Profile</div>
+    <div>
+      <div className='mb-5'>Profile</div>
+      <button onClick={() => {
+        var hostname = window.location.hostname;
+        if (hostname === 'localhost') {
+          console.log(hostname);
+        } else {
+          console.log(window.location.host);
+        }
+      }}>Log domain</button>
+    </div>
   )
 }
 
