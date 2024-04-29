@@ -28,7 +28,7 @@ export const register = async (merchant_id: string, unique_identifier: string): 
             client_domain: getHost()
         })).data;
 
-        const { registrationOptions: credentialCreationOptions, registration_session_id } = opt_resp.data;
+        const { registration_options: credentialCreationOptions, registration_session_id } = opt_resp.data;
 
         console.log("registration_session_id", registration_session_id)
         console.log(JSON.parse(JSON.stringify(credentialCreationOptions)))
@@ -91,7 +91,7 @@ export const authenticate = async (credential_id: string, device_id: string, reg
             client_domain: getHost()
         })).data;
 
-        const { authnOptions: credentialRequestOptions, authentication_session_id } = auth_resp.data;
+        const { authn_options: credentialRequestOptions, authentication_session_id } = auth_resp.data;
 
         console.log("authentication_session_id", authentication_session_id);
 
